@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "Automatically blacks out names on webpages.",
   "icons": {
-  "2": "icons/2.png",
+  "16": "icons/2.png"
 
   },
   "permissions": [
