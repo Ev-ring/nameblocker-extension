@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "CensorNames",
   "version": "1.0",
-  "description": "Automatically blacks out names on webpages."
-   "permissions": [
+  "description": "Automatically blacks out names on webpages.",
+  "permissions": [
     "storage"
   ],
   "host_permissions": [
@@ -15,9 +15,9 @@
       "js": ["content-script.js"],
       "run_at": "document_end"
     }
+  ],
   "action": {
-  "default_popup": "popup.html",
-  "default_icon": "icons/48.png"
-}
-  ]
+    "default_popup": "popup.html",
+    "default_icon": "icons/48.png"
+  }
 }
