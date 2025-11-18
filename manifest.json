@@ -11,11 +11,11 @@
     "storage"
   ],
   "host_permissions": [
-    "https://kit.cs.kzoo.edu/*"
+    "<all_urls>"
   ],
   "content_scripts": [
     {
-      "matches": ["https://kit.cs.kzoo.edu/*"],
+      "matches": ["<all_urls>"],
       "js": ["Content.js"],
       "run_at": "document_end"
     }
