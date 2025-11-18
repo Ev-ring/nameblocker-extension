@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["https://kit.cs.kzoo.edu/*"],
-      "js": ["content-script.js"],
+      "js": ["Content.js"],
       "run_at": "document_end"
     }
   ],
