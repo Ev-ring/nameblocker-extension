@@ -1,14 +1,37 @@
 //rahhh
-
+let nameList = [];
 fetch('https://raw.githubusercontent.com/Ev-ring/nameblocker-extension/main/first-names.txt')
   .then(result => result.text())
   .then(text => {
-    const nameList = text.split(/\r?\n/).filter(Boolean); // array of names
+    nameList = text.split(/\r?\n/).filter(Boolean); // array of names
     censorNames(nameList);
+    observeDOMChanges(nameList); // incase of dynamically loaded content
   })
   .catch(error => {
     console.error("Failed to load name list", error);
   });
+//to toggle it on and off
+chrome.storage.onChanged.addListener((changes) => {
+    if (changes.enabled) {
+        if (changes.enabled.newValue) {
+            censorNames(nameList);
+        } else {
+            location.reload(); // or undo the spans
+        }
+    }
+});
+
+
+//MutationObserver function for dynamically loaded pages
+function observeDOMChanges(nameList) {
+    const observer = new MutationObserver(() => {
+        censorNames(nameList);
+    });
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+}
 
 
 function censorNames(nameList){
