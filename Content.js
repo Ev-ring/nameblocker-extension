@@ -1,5 +1,5 @@
 // --- Configuration & Global State ---
-const SPOILER_CLASS = 'gemini-spoiler-censor';
+const SPOILER_CLASS = 'spoiler-censor';
 let nameRegex = null; // This will hold the dynamically created RegExp
 let isEnabled = true; // Assume enabled until storage is checked
 
@@ -142,7 +142,7 @@ function observeDOMChanges() {
         subtree: true     // Watch the entire DOM tree
     });
 
-    window.geminiCensorObserver = observer; 
+    window.CensorObserver = observer; 
 }
 
 
@@ -164,10 +164,10 @@ chrome.storage.onChanged.addListener((changes) => {
 
 function injectSpoilerStyles() {
     // Only inject styles once
-    if (document.getElementById('gemini-censor-styles')) return;
+    if (document.getElementById('censor-styles')) return;
 
     const style = document.createElement('style');
-    style.id = 'gemini-censor-styles';
+    style.id = 'censor-styles';
     style.textContent = `
         /* The main spoiler style: black background, black text to hide the content */
         .${SPOILER_CLASS} {
@@ -204,7 +204,11 @@ function addRevealClickListener() {
         const spoilerElement = event.target.closest(`.${SPOILER_CLASS}`);
         
         if (spoilerElement && !spoilerElement.classList.contains('revealed')) {
+            
+            // FIX: Prevent the browser from following a parent link or button action
+            event.preventDefault(); 
             event.stopPropagation(); 
+            
             spoilerElement.classList.add('revealed');
         }
     }, true); 
